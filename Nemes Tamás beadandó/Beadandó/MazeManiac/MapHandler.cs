@@ -62,35 +62,6 @@ namespace MazeManiac
                 Console.WriteLine("Hiba a fájl beolvasásakor!");
             }
         }
-        public void Beolvas(string filename)
-        {
-            try
-            {
-
-                string[] lines = File.ReadAllLines(filename);
-
-                int width = lines[0].Length;
-                int height = lines.Length;
-
-                char[,] mapFromFile = new char[width, height];
-
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    for (int j = 0; j < lines[i].Length; j++)
-                    {
-                        char c = lines[i][j];
-                        mapFromFile[i, j] = c;
-                    }
-                }
-
-                this.map = mapFromFile;
-
-            }
-            catch (FileNotFoundException e)
-            {
-                Console.WriteLine("Hiba a fájl beolvasásakor!");
-            }
-        }
         public String getName()
         {
             return mapname;
@@ -153,8 +124,9 @@ namespace MazeManiac
             }
             else if (harc_log[harc_log.Count - 1] == "ENEMY")
             {
-                this.message += "\n" + "Súlyosan megsérültél! (-10 hp)";
-                p.hp -= 10;
+                this.message += "\n" + "Súlyosan megsérültél! Vége a játéknak";
+                p.hp = 0;
+                GameIsOver = true;
                 return false;
             }
             else
@@ -195,9 +167,15 @@ namespace MazeManiac
                         map[x, y] = '.';
                     }
                 }
+                else if (next_step=='h')
+                {
+                    p.hp += 50;
+                    this.message += "Kaptál healt újult erővel térhetsz vissza a csata mezőre! Az életerőd: " + p.hp ;
+                }
                 else if (next_step == 'x')
                 {
-                    this.message += "Sikeresen kijutottál az első labirintusból! Gratulálok! Egyből jön a következő:)";
+                    this.message += "Sikeresen kijutottál az első labirintusból! Gratulálok!";
+                    on_x = true;
                     on_x = true;
                 }
                 else

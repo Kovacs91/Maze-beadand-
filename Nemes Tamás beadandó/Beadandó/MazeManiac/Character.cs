@@ -47,7 +47,7 @@ namespace MazeManiac
         }
         public string Kiír()
         {
-            string ki = "A karakter szintje: " + this.hp + " szint"
+            string ki = "A karakter szintje: " + this.lvl + " szint"
                 + "\n"
                 + "-------------------------------------------------------------------------------- "
                 + "\n"
@@ -55,7 +55,7 @@ namespace MazeManiac
                 + "\n"
                 +"A karakter ereje: " +this.strength
                 +"\n"
-                +"A fegyver ("+this.weapon+")";
+                +"A fegyver (Kezdők pallosa)";
 
             return ki;
         }
